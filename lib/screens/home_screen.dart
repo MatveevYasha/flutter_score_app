@@ -1,3 +1,4 @@
+import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_score_app/domain/player_model.dart';
 import 'package:flutter_score_app/utils/styles.dart';
@@ -11,8 +12,22 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   bool playToggle = false;
+
+  late final CustomTimerController _controller = CustomTimerController(
+      vsync: this,
+      begin: const Duration(minutes: 30),
+      end: const Duration(seconds: 0),
+      initialState: CustomTimerState.reset,
+      interval: CustomTimerInterval.seconds);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -360,6 +375,11 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () {
                 setState(() {
                   playToggle = !playToggle;
+                  if (_controller.state.value == CustomTimerState.counting) {
+                    _controller.pause();
+                  } else {
+                    _controller.start();
+                  }
                 });
               },
               child: Container(
@@ -396,7 +416,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SafeArea(
             child: Row(
               children: [
-                Spacer(),
+                const Spacer(),
                 Slidable(
                   endActionPane: ActionPane(
                     extentRatio: 0.4,
@@ -421,14 +441,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 75,
                     width: 300,
                     child: Center(
-                      child: Text(
-                        'timer',
-                        style: Style.playerScore,
-                      ),
+                      child: CustomTimer(
+                          controller: _controller,
+                          builder: (state, remaining) {
+                            return Text(
+                                "${remaining.minutes}:${remaining.seconds}",
+                                style: Style.playerScore);
+                          }),
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
           )
