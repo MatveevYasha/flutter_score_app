@@ -87,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Expanded(
                   flex: 1,
                   child: Slidable(
+                    closeOnScroll: false,
                     endActionPane: ActionPane(
                       extentRatio: 0.4,
                       motion: const ScrollMotion(),
@@ -158,6 +159,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Expanded(
                   flex: 1,
                   child: Slidable(
+                    closeOnScroll: false,
                     endActionPane: ActionPane(
                       extentRatio: 0.4,
                       motion: const ScrollMotion(),
@@ -229,6 +231,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Expanded(
                   flex: 1,
                   child: Slidable(
+                    closeOnScroll: false,
                     endActionPane: ActionPane(
                       extentRatio: 0.4,
                       motion: const ScrollMotion(),
@@ -300,6 +303,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Expanded(
                   flex: 1,
                   child: Slidable(
+                    closeOnScroll: false,
                     endActionPane: ActionPane(
                       extentRatio: 0.4,
                       motion: const ScrollMotion(),
@@ -418,6 +422,7 @@ class _HomeScreenState extends State<HomeScreen>
               children: [
                 const Spacer(),
                 Slidable(
+                  closeOnScroll: false,
                   endActionPane: ActionPane(
                     extentRatio: 0.4,
                     motion: const ScrollMotion(),
