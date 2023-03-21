@@ -66,21 +66,9 @@ class _SettingScreenState extends State<SettingScreen> {
                           borderRadius: BorderRadius.circular(5),
                           color: Style.colorBlack,
                         ),
-                        child: Row(
-                          children: [
-                            Text(
-                              '36',
-                              style: Style.textH2W,
-                            ),
-                            Text(
-                              ':',
-                              style: Style.textH2W,
-                            ),
-                            Text(
-                              '00',
-                              style: Style.textH2W,
-                            ),
-                          ],
+                        child: Text(
+                          'минут',
+                          style: Style.textH2W,
                         ),
                       ),
                     ],
@@ -311,8 +299,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     Center(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context)
-                              .pushNamed('/screens/home_screen');
+                          Navigator.of(context).pop();
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(

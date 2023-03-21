@@ -5,6 +5,7 @@ class PlayerModel extends ChangeNotifier {
   int teamOnePlayerTwoScore = 0;
   int teamTwoPlayerOneScore = 0;
   int teamTwoPlayerTwoScore = 0;
+  int partyTime = 30;
 
 // Team 1
 // Player 1
