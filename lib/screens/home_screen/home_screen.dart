@@ -12,11 +12,8 @@ import 'package:flutter_score_app/domain/player_model.dart';
 import 'package:flutter_score_app/utils/styles.dart';
 
 class HomeScreen extends StatefulWidget {
-  int minutes;
-
   HomeScreen({
     Key? key,
-    required this.minutes,
   }) : super(key: key);
 
   @override
@@ -29,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   late final CustomTimerController _controller = CustomTimerController(
       vsync: this,
-      begin: Duration(minutes: widget.minutes),
+      begin: Duration(minutes: 30),
       end: const Duration(seconds: 0),
       initialState: CustomTimerState.reset,
       interval: CustomTimerInterval.seconds);
