@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_score_app/screens/home_screen/home_screen.dart';
 import 'package:flutter_score_app/screens/setting_screen/widgets/button.dart';
 import 'package:flutter_score_app/screens/setting_screen/widgets/player_string.dart';
 import 'package:flutter_score_app/screens/setting_screen/widgets/team_name.dart';
@@ -18,6 +19,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   List list = [5, 10, 15, 20, 30];
   int selectedIndex = 4;
+  int _minutes = 30;
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +80,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                 onTap: () {
                                   setState(() {
                                     selectedIndex = index;
+
+                                    _minutes = list[index];
                                   });
                                 },
                                 child: Container(
@@ -167,7 +171,13 @@ class _SettingScreenState extends State<SettingScreen> {
                         color: Colors.green,
                         text: 'Сохранить',
                         onTap: () {
-                          Navigator.of(context).pop();
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => HomeScreen(
+                                minutes: _minutes,
+                              ),
+                            ),
+                          );
                         }),
                     Button(
                       color: Colors.red,

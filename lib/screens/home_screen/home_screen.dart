@@ -1,19 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:flutter_score_app/domain/player_model.dart';
 import 'package:flutter_score_app/screens/home_screen/widgets/divider_widget.dart';
 import 'package:flutter_score_app/screens/home_screen/widgets/play_toggler_widget.dart';
 import 'package:flutter_score_app/screens/home_screen/widgets/player_widget.dart';
 import 'package:flutter_score_app/screens/home_screen/widgets/team_screen_widget.dart';
 import 'package:flutter_score_app/screens/home_screen/widgets/timer_zone_widget.dart';
-import 'package:provider/provider.dart';
-
-import 'package:flutter_score_app/domain/player_model.dart';
 import 'package:flutter_score_app/utils/styles.dart';
 
 class HomeScreen extends StatefulWidget {
+  int? minutes;
   HomeScreen({
     Key? key,
+    this.minutes,
   }) : super(key: key);
 
   @override
@@ -23,10 +25,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   bool playToggle = false;
+  late int _minutes;
+
+  @override
+  void initState() {
+    if (widget.minutes != null) {
+      _minutes = widget.minutes!;
+    } else {
+      _minutes = 30;
+    }
+    super.initState();
+  }
 
   late final CustomTimerController _controller = CustomTimerController(
       vsync: this,
-      begin: Duration(minutes: 30),
+      begin: Duration(minutes: _minutes),
       end: const Duration(seconds: 0),
       initialState: CustomTimerState.reset,
       interval: CustomTimerInterval.seconds);
