@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_score_app/generated/locale_keys.g.dart';
 import 'package:flutter_score_app/screens/home_screen/home_screen.dart';
 import 'package:flutter_score_app/screens/setting_screen/widgets/button.dart';
 import 'package:flutter_score_app/screens/setting_screen/widgets/player_string.dart';
@@ -40,9 +42,20 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       backgroundColor: Style.colorBlack,
       appBar: AppBar(
-        title: const Text(
-          'Настройки',
-          style: TextStyle(
+        actions: [
+          IconButton(
+              onPressed: () {
+                if (context.locale.languageCode == 'en') {
+                  context.setLocale(const Locale('ru'));
+                } else {
+                  context.setLocale(const Locale('en'));
+                }
+              },
+              icon: const Icon(Icons.language))
+        ],
+        title: Text(
+          LocaleKeys.setings.tr(),
+          style: const TextStyle(
             fontSize: 28,
           ),
         ),
@@ -66,7 +79,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     child: Row(
                       children: [
                         Text(
-                          'Время партии',
+                          LocaleKeys.party_time.tr(),
                           style: Style.textH2,
                         ),
                         SizedBox(
@@ -117,10 +130,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 SizedBox(height: screenHeight * 0.1),
                 TeamName(
-                  text: 'Команда 1 - Красные',
+                  text: LocaleKeys.red_team.tr(),
                 ),
                 PlayerString(
-                  name: 'Игрок 1',
+                  name: LocaleKeys.player_one.tr(),
                   playerScore: teamOnePlayerOneScoreVar,
                   decremet: () {
                     model.decrementTeamOnePlayerOneScore();
@@ -130,7 +143,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   },
                 ),
                 PlayerString(
-                  name: 'Игрок 2',
+                  name: LocaleKeys.player_two.tr(),
                   playerScore: teamOnePlayerTwoScoreVar,
                   decremet: () {
                     model.decrementTeamOnePlayerTwoScore();
@@ -141,10 +154,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 SizedBox(height: screenHeight * 0.1),
                 TeamName(
-                  text: 'Команда 2 - Черные',
+                  text: LocaleKeys.black_team.tr(),
                 ),
                 PlayerString(
-                  name: 'Игрок 1',
+                  name: LocaleKeys.player_one.tr(),
                   playerScore: teamTwoPlayerOneScoreVar,
                   decremet: () {
                     model.decrementTeamTwoPlayerOneScore();
@@ -154,7 +167,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   },
                 ),
                 PlayerString(
-                  name: 'Игрок 2',
+                  name: LocaleKeys.player_two.tr(),
                   playerScore: teamTwoPlayerTwoScoreVar,
                   decremet: () {
                     model.decrementTeamTwoPlayerTwoScore();
@@ -169,7 +182,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   children: [
                     Button(
                         color: Colors.green,
-                        text: 'Сохранить',
+                        text: LocaleKeys.save.tr(),
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -181,7 +194,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         }),
                     Button(
                       color: Colors.red,
-                      text: 'Сбросить все',
+                      text: LocaleKeys.reset.tr(),
                       onTap: () {
                         Navigator.of(context).pushNamed('/screens/home_screen');
                         model.resetTeamOnePlayerOneScore();

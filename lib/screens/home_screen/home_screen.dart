@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:custom_timer/custom_timer.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_score_app/generated/locale_keys.g.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_score_app/domain/player_model.dart';
@@ -92,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen>
                 PlayerWidget(
                   model: model,
                   teamOnePlayerOneScoreVar: teamOnePlayerOneScoreVar,
-                  playerName: 'Игрок 1',
+                  playerName: LocaleKeys.player_one.tr(),
                   increment: () {
                     model.incrementTeamOnePlayerOneScore();
                   },
@@ -108,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen>
                 PlayerWidget(
                   model: model,
                   teamOnePlayerOneScoreVar: teamOnePlayerOneScoreVar,
-                  playerName: 'Игрок 2',
+                  playerName: LocaleKeys.player_two.tr(),
                   increment: () {
                     model.incrementTeamOnePlayerTwoScore();
                   },
@@ -124,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen>
                 PlayerWidget(
                   model: model,
                   teamOnePlayerOneScoreVar: teamOnePlayerOneScoreVar,
-                  playerName: 'Игрок 1',
+                  playerName: LocaleKeys.player_one.tr(),
                   increment: () {
                     model.incrementTeamTwoPlayerOneScore();
                   },
@@ -140,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen>
                 PlayerWidget(
                   model: model,
                   teamOnePlayerOneScoreVar: teamOnePlayerOneScoreVar,
-                  playerName: 'Игрок 2',
+                  playerName: LocaleKeys.player_two.tr(),
                   increment: () {
                     model.incrementTeamTwoPlayerTwoScore();
                   },
@@ -174,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen>
             top: 10,
             left: 20,
             child: Text(
-              'Команда 1',
+              LocaleKeys.team_one.tr(),
               style: Style.teamName,
             ),
           ),
@@ -182,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen>
             top: 10,
             right: 20,
             child: Text(
-              'Команда 2',
+              LocaleKeys.team_two.tr(),
               style: Style.teamName,
             ),
           ),
