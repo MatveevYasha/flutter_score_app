@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ui';
+
 import 'package:custom_timer/custom_timer.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   bool playToggle = false;
+  bool finishGame = false;
   late int _minutes;
 
   @override
@@ -36,6 +39,13 @@ class _HomeScreenState extends State<HomeScreen>
     } else {
       _minutes = 30;
     }
+    _controller.state.addListener(() {
+      if (_controller.state.value == CustomTimerState.finished) {
+        setState(() {
+          finishGame = true;
+        });
+      }
+    });
     super.initState();
   }
 
@@ -60,15 +70,13 @@ class _HomeScreenState extends State<HomeScreen>
         context.watch<PlayerModel>().teamOnePlayerOneScore;
     final teamOnePlayerTwoScoreVar =
         context.watch<PlayerModel>().teamOnePlayerTwoScore;
-    final teamOneScore =
-        (teamOnePlayerOneScoreVar + teamOnePlayerTwoScoreVar).toString();
+    final teamOneScore = (teamOnePlayerOneScoreVar + teamOnePlayerTwoScoreVar);
     // team two
     final teamTwoPlayerOneScoreVar =
         context.watch<PlayerModel>().teamTwoPlayerOneScore;
     final teamTwoPlayerTwoScoreVar =
         context.watch<PlayerModel>().teamTwoPlayerTwoScore;
-    final teamTwoScore =
-        (teamTwoPlayerOneScoreVar + teamTwoPlayerTwoScoreVar).toString();
+    final teamTwoScore = (teamTwoPlayerOneScoreVar + teamTwoPlayerTwoScoreVar);
 
     return Scaffold(
         body: Center(
@@ -78,11 +86,11 @@ class _HomeScreenState extends State<HomeScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TeamScreenWidget(
-                teamOneScore: teamOneScore,
+                teamOneScore: '$teamOneScore',
                 color: Style.colorRed,
               ),
               TeamScreenWidget(
-                teamOneScore: teamTwoScore,
+                teamOneScore: '$teamTwoScore',
                 color: Style.colorBlack,
               ),
             ],
@@ -157,21 +165,6 @@ class _HomeScreenState extends State<HomeScreen>
               ],
             ),
           ),
-          Center(
-            child: PlayTogglerWidget(
-              playToggle: playToggle,
-              onTab: () {
-                setState(() {
-                  playToggle = !playToggle;
-                  if (_controller.state.value == CustomTimerState.counting) {
-                    _controller.pause();
-                  } else {
-                    _controller.start();
-                  }
-                });
-              },
-            ),
-          ),
           Positioned(
             top: 10,
             left: 20,
@@ -196,7 +189,57 @@ class _HomeScreenState extends State<HomeScreen>
                 const Spacer(),
               ],
             ),
-          )
+          ),
+          Center(
+            child: (finishGame == true)
+                ? BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: AlertDialog(
+                      title: Text('Игра закончилась'),
+                      content: (teamOneScore > teamTwoScore == true)
+                          ? Text('Победила команда 1')
+                          : (teamOneScore < teamTwoScore == true)
+                              ? Text('Победила команда 2')
+                              : Text('Ничья'),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              setState(() {
+                                finishGame = false;
+                              });
+                            },
+                            child: Text('Посмотреть результаты')),
+                        TextButton(
+                            onPressed: () {
+                              setState(() {
+                                finishGame = false;
+                                _controller.reset();
+                                model.resetTeamOnePlayerOneScore();
+                                model.resetTeamOnePlayerTwoScore();
+                                model.resetTeamTwoPlayerOneScore();
+                                model.resetTeamTwoPlayerTwoScore();
+                                playToggle = !playToggle;
+                              });
+                            },
+                            child: Text('Начать заново')),
+                      ],
+                    ),
+                  )
+                : PlayTogglerWidget(
+                    playToggle: playToggle,
+                    onTab: () {
+                      setState(() {
+                        playToggle = !playToggle;
+                        if (_controller.state.value ==
+                            CustomTimerState.counting) {
+                          _controller.pause();
+                        } else {
+                          _controller.start();
+                        }
+                      });
+                    },
+                  ),
+          ),
         ],
       ),
     ));
