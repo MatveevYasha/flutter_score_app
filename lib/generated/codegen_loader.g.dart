@@ -24,7 +24,16 @@ class CodegenLoader extends AssetLoader{
   "red_team": "Команда красных",
   "black_team": "Команда черных",
   "save": "Сохранить",
-  "reset": "Сбросить все"
+  "reset": "Сбросить все",
+  "sure_to_reset_player_points": "Вы точно хотите сбросить очки игрока?",
+  "no": "Нет",
+  "yes": "Да",
+  "game_over": "Игра закончилась",
+  "team_one_won": "Победила команда 1",
+  "team_two_won": "Победила команда 2",
+  "game_ended_draw": "Игра закончилась вничью",
+  "view_results": "Посмотреть результаты",
+  "start_over": "Начать заново"
 };
 static const Map<String,dynamic> en = {
   "player_one": "Player 1",
@@ -36,7 +45,16 @@ static const Map<String,dynamic> en = {
   "red_team": "Red Team",
   "black_team": "Black Team",
   "save": "Save",
-  "reset": "Reset"
+  "reset": "Reset",
+  "sure_to_reset_player_points": "Are you sure you want to reset the player's points?",
+  "no": "No",
+  "yes": "Yes",
+  "game_over": "The game is over",
+  "team_one_won": "Team 1 won",
+  "team_two_won": "Team 2 won",
+  "game_ended_draw": "The game ended in a draw",
+  "view_results": "View results",
+  "start_over": "Start over"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "en": en};
 }

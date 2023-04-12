@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_score_app/domain/player_model.dart';
+import 'package:flutter_score_app/generated/locale_keys.g.dart';
 import 'package:flutter_score_app/utils/styles.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -46,15 +48,15 @@ class PlayerWidget extends StatelessWidget {
           onLongPress: () => showDialog<String>(
             context: context,
             builder: (BuildContext context) => AlertDialog(
-              title: const Text('Вы точно хотите сбросить очки игрока?'),
+              title: Text(LocaleKeys.sure_to_reset_player_points.tr()),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Нет'),
+                  child: Text(LocaleKeys.no.tr()),
                 ),
                 TextButton(
                   onPressed: reset,
-                  child: const Text('Да'),
+                  child: Text(LocaleKeys.yes.tr()),
                 ),
               ],
             ),

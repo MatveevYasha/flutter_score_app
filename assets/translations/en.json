@@ -8,5 +8,14 @@
     "red_team": "Red Team",
     "black_team": "Black Team",
     "save": "Save",
-    "reset": "Reset"
+    "reset": "Reset",
+    "sure_to_reset_player_points": "Are you sure you want to reset the player's points?",
+    "no": "No",
+    "yes": "Yes",
+    "game_over": "The game is over",
+    "team_one_won": "Team 1 won",
+    "team_two_won": "Team 2 won",
+    "game_ended_draw": "The game ended in a draw",
+    "view_results": "View results",
+    "start_over": "Start over"
 }

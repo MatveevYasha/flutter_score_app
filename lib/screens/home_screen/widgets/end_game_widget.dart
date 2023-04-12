@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 import 'package:custom_timer/custom_timer.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_score_app/domain/player_model.dart';
+import 'package:flutter_score_app/generated/locale_keys.g.dart';
 
 class EndGameWidget extends StatelessWidget {
   EndGameWidget({
@@ -27,16 +29,17 @@ class EndGameWidget extends StatelessWidget {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
       child: AlertDialog(
-        title: Text('Игра закончилась'),
+        title: Text(LocaleKeys.game_over.tr()),
         content: (teamOneScore > teamTwoScore == true)
-            ? Text('Победила команда 1')
+            ? Text(LocaleKeys.team_one_won.tr())
             : (teamOneScore < teamTwoScore == true)
-                ? Text('Победила команда 2')
-                : Text('Ничья'),
+                ? Text(LocaleKeys.team_two_won.tr())
+                : Text(LocaleKeys.game_ended_draw.tr()),
         actions: [
           TextButton(
-              onPressed: leftOnTab, child: Text('Посмотреть результаты')),
-          TextButton(onPressed: rightOnTab, child: Text('Начать заново')),
+              onPressed: leftOnTab, child: Text(LocaleKeys.view_results.tr())),
+          TextButton(
+              onPressed: rightOnTab, child: Text(LocaleKeys.start_over.tr())),
         ],
       ),
     );
