@@ -43,30 +43,27 @@ class PlayerWidget extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: increment,
+          onLongPress: () => showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: const Text('Вы точно хотите сбросить очки игрока?'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Нет'),
+                ),
+                TextButton(
+                  onPressed: reset,
+                  child: const Text('Да'),
+                ),
+              ],
+            ),
+          ),
           child: Container(
             height: 100,
             color: Style.colorGreyScore,
             child: Stack(
               children: [
-                Positioned(
-                  top: 5,
-                  left: 5,
-                  child: GestureDetector(
-                    onTap: reset
-                    // добавить всплывающее окно перед сбросом "Вы точно хотите
-                    //сбросить очки игрока?"
-                    ,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Style.colorPurple),
-                      child: Icon(
-                        Icons.refresh,
-                        color: Style.colorWhite,
-                      ),
-                    ),
-                  ),
-                ),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Column(

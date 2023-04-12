@@ -5,6 +5,7 @@ import 'package:custom_timer/custom_timer.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_score_app/generated/locale_keys.g.dart';
+import 'package:flutter_score_app/screens/home_screen/widgets/end_game_widget.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_score_app/domain/player_model.dart';
@@ -108,6 +109,7 @@ class _HomeScreenState extends State<HomeScreen>
                   },
                   reset: () {
                     model.resetTeamOnePlayerOneScore();
+                    Navigator.pop(context);
                   },
                   decrement: (context) {
                     model.decrementTeamOnePlayerOneScore();
@@ -124,6 +126,7 @@ class _HomeScreenState extends State<HomeScreen>
                   },
                   reset: () {
                     model.resetTeamOnePlayerTwoScore();
+                    Navigator.pop(context);
                   },
                   decrement: (context) {
                     model.decrementTeamOnePlayerTwoScore();
@@ -140,6 +143,7 @@ class _HomeScreenState extends State<HomeScreen>
                   },
                   reset: () {
                     model.resetTeamTwoPlayerOneScore();
+                    Navigator.pop(context);
                   },
                   decrement: (context) {
                     model.decrementTeamTwoPlayerOneScore();
@@ -156,6 +160,7 @@ class _HomeScreenState extends State<HomeScreen>
                   },
                   reset: () {
                     model.resetTeamTwoPlayerTwoScore();
+                    Navigator.pop(context);
                   },
                   decrement: (context) {
                     model.decrementTeamTwoPlayerTwoScore();
@@ -192,38 +197,28 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           Center(
             child: (finishGame == true)
-                ? BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                    child: AlertDialog(
-                      title: Text('Игра закончилась'),
-                      content: (teamOneScore > teamTwoScore == true)
-                          ? Text('Победила команда 1')
-                          : (teamOneScore < teamTwoScore == true)
-                              ? Text('Победила команда 2')
-                              : Text('Ничья'),
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              setState(() {
-                                finishGame = false;
-                              });
-                            },
-                            child: Text('Посмотреть результаты')),
-                        TextButton(
-                            onPressed: () {
-                              setState(() {
-                                finishGame = false;
-                                _controller.reset();
-                                model.resetTeamOnePlayerOneScore();
-                                model.resetTeamOnePlayerTwoScore();
-                                model.resetTeamTwoPlayerOneScore();
-                                model.resetTeamTwoPlayerTwoScore();
-                                playToggle = !playToggle;
-                              });
-                            },
-                            child: Text('Начать заново')),
-                      ],
-                    ),
+                ? EndGameWidget(
+                    teamOneScore: teamOneScore,
+                    teamTwoScore: teamTwoScore,
+                    controller: _controller,
+                    model: model,
+                    leftOnTab: () {
+                      setState(() {
+                        finishGame = false;
+                        playToggle = !playToggle;
+                      });
+                    },
+                    rightOnTab: () {
+                      setState(() {
+                        finishGame = false;
+                        _controller.reset();
+                        model.resetTeamOnePlayerOneScore();
+                        model.resetTeamOnePlayerTwoScore();
+                        model.resetTeamTwoPlayerOneScore();
+                        model.resetTeamTwoPlayerTwoScore();
+                        playToggle = !playToggle;
+                      });
+                    },
                   )
                 : PlayTogglerWidget(
                     playToggle: playToggle,
