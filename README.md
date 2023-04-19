@@ -1,6 +1,8 @@
-# flutter_score_app
+# Приложение для Новосибирского крокет клуба
 
-## Приложение для Новосибирского крокет клуба
+<p align="center">
+<img src="./docs/assets/main_screen.png" height="150" />
+</p>
 
 ### Функционал:
 - Возможен выбор времени игры 30, 20, 15, 10 или 5 минут;
@@ -11,16 +13,35 @@
 
 ### Скриншоты приложения
 
-<p align="center">
+Действия
+<p align="left">
 <img src="./docs/assets/main_screen.png" height="150" />
 </p>
+Локализация
+<p align="left">
+<img src="./docs/assets/main_screen_actions.png" height="150" />
+</p>
+Экран настроек
+<p align="left">
+<img src="./docs/assets/settings_screen_start.png" height="150" />
+</p>
+<p align="left">
+<img src="./docs/assets/settings_screen_end.png" height="150" />
+</p>
+Диалоговое окно при сбросе очков
+<p align="left">
+<img src="./docs/assets/reset_score_warning.png" height="150" />
+</p>
+Диалоговое окно при завершении игры
+<p align="left">
+<img src="./docs/assets/end_game.png" height="150" />
+</p>
 
-<div class="column" align="center">
-  <img src="./docs/assets/end_game.png" height="150" />
-  <img src="./docs/assets/main_screen_actions.png" height="150" />
-</div>
+
+
+
 
 ### Terminal comand
-    - For localization
+For localization:
 flutter pub run easy_localization:generate -S "assets/translations"
 flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart -S "assets/translations"
