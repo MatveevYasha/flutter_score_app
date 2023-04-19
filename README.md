@@ -14,26 +14,26 @@
 ### Скриншоты приложения
 
 Действия
-<p align="left">
-<img src="./docs/assets/main_screen.png" height="150" />
-</p>
-Локализация
-<p align="left">
+<p align="center">
 <img src="./docs/assets/main_screen_actions.png" height="150" />
 </p>
+Локализация
+<p align="center">
+<img src="./docs/assets/main_screen_local.png" height="150" />
+</p>
 Экран настроек
-<p align="left">
+<p align="center">
 <img src="./docs/assets/settings_screen_start.png" height="150" />
 </p>
-<p align="left">
+<p align="center">
 <img src="./docs/assets/settings_screen_end.png" height="150" />
 </p>
 Диалоговое окно при сбросе очков
-<p align="left">
+<p align="center">
 <img src="./docs/assets/reset_score_warning.png" height="150" />
 </p>
 Диалоговое окно при завершении игры
-<p align="left">
+<p align="center">
 <img src="./docs/assets/end_game.png" height="150" />
 </p>
 
@@ -41,7 +41,6 @@
 
 
 
-### Terminal comand
-For localization:
+### Terminal comand (for localization)
 flutter pub run easy_localization:generate -S "assets/translations"
 flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart -S "assets/translations"
